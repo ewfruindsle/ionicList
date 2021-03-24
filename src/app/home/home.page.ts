@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataGetterService, City} from '../service/data-getter.service'
+import { DataGetterService, City } from '../service/data-getter.service';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +10,13 @@ export class HomePage {
   cities: City[];
   showNew = false;
   showEdit = -1;
+  username: string;
 
   constructor(private dataGetter: DataGetterService) {
-    this.dataGetter.getCities().subscribe(
-      (data) => {
-        this.cities = data;
-      }
-    );
+    this.dataGetter.getCities().subscribe((data) => {
+      this.cities = data;
+    });
+    this.username = this.dataGetter.getUser();
   }
 
   add() {
@@ -25,13 +25,12 @@ export class HomePage {
 
   edit(city: City) {}
 
-  delete(index: number){
-    this.dataGetter.deleteCity(index)
+  delete(index: number) {
+    this.dataGetter.deleteCity(index);
   }
 
-  addCity(city){
+  addCity(city) {
     this.dataGetter.addCity(city);
     this.showNew = false;
   }
-
 }

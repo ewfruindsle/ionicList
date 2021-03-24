@@ -8,38 +8,53 @@ export interface City {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataGetterService {
   private cities: City[] = [
     {
       cityName: 'Nikolaev',
       country: 'Ukraine',
-      population: '486267'
+      population: '486267',
     },
     {
       cityName: 'Stockholm',
       country: 'Sweden',
-      population: '975551'
+      population: '975551',
     },
     {
       cityName: 'Melbourne',
       country: 'Australia',
-      population: '486267'
-    }
-  ]
+      population: '486267',
+    },
+  ];
 
-  constructor() { }
+  private username = '';
+  private users = ['Anastasiia', 'Alice', 'Alexander'];
 
-  getCities(): Observable<City[]>{
+  getUser() {
+    return this.username;
+  }
+
+  setUser(name: string) {
+    this.username = name;
+  }
+
+  userExists(name: string): boolean {
+    return this.users.indexOf(name) !== -1;
+  }
+
+  constructor() {}
+
+  getCities(): Observable<City[]> {
     return of(this.cities);
   }
 
-  addCity(city: City){
+  addCity(city: City) {
     this.cities.push(city);
   }
 
-  deleteCity(index){
+  deleteCity(index) {
     this.cities.splice(index, 1);
   }
 }

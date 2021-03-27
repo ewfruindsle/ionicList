@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
+  {
+    path: 'sights/:cityNm',
+    loadChildren: () =>
+      import('./sights/sights.module').then((m) => m.SightsPageModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

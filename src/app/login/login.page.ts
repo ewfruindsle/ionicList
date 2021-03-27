@@ -1,4 +1,4 @@
-import { DataGetterService } from './../service/data-getter.service';
+import { DataGetterService } from './../services/data-getter.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';

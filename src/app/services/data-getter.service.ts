@@ -32,6 +32,39 @@ export class DataGetterService {
   private username = '';
   private users = ['Anastasiia', 'Alice', 'Alexander'];
 
+  private sights = [
+    { name: 'Yacht club', city: 'Nikolaev', foundationYear: '1889' },
+    {
+      name: 'Nikolaev Astronomical Observatory',
+      city: 'Nikolaev',
+      foundationYear: '1821',
+    },
+    {
+      name: 'Stockholms stadsbibliotek',
+      city: 'Stockholm',
+      foundationYear: '1928',
+    },
+    { name: 'Vasamuseet', city: 'Stockholm', foundationYear: '1990' },
+    {
+      name: 'Royal Botanic Gardens',
+      city: 'Melbourne',
+      foundationYear: '1846',
+    },
+    {
+      name: 'Federation Square',
+      city: 'Melbourne',
+      foundationYear: '2002',
+    },
+  ];
+
+  getSights(cityName: string): Observable<any[]> {
+    return of(
+      this.sights.filter((item) => {
+        return item.city === cityName;
+      })
+    );
+  }
+
   getUser() {
     return this.username;
   }

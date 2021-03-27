@@ -1,5 +1,6 @@
+import { SharedDataService } from './../services/shared-data.service';
 import { Component } from '@angular/core';
-import { DataGetterService, City } from '../service/data-getter.service';
+import { DataGetterService, City } from '../services/data-getter.service';
 
 @Component({
   selector: 'app-home',
@@ -7,16 +8,26 @@ import { DataGetterService, City } from '../service/data-getter.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  title = 'Cities';
   cities: City[];
   showNew = false;
   showEdit = -1;
   username: string;
 
-  constructor(private dataGetter: DataGetterService) {
+  constructor(
+    private dataGetter: DataGetterService,
+    private sharedData: SharedDataService
+  ) {
     this.dataGetter.getCities().subscribe((data) => {
       this.cities = data;
     });
     this.username = this.dataGetter.getUser();
+  }
+
+  ionViewDidEnter() {
+    if (this.sharedData.getTextData().length != 0) {
+      this.title = this.sharedData.getTextData();
+    }
   }
 
   add() {

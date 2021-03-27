@@ -1,4 +1,4 @@
-import { DataGetterService } from './../service/data-getter.service';
+import { DataGetterService } from './../services/data-getter.service';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,

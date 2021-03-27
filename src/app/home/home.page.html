@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Cities </ion-title>
+    <ion-title> {{title}} </ion-title>
     <ion-buttons slot="secondary">
       ({{username}})
       <ion-button routerLink="/login" routerDirection="root">
@@ -44,6 +44,16 @@
           <ion-label>{{city.cityName}}</ion-label>
           <ion-note slot="end">{{city.country}}</ion-note>
         </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option
+            color="secondary"
+            routerLink="/sights/{{city.cityName}}"
+            routerDirection="forward"
+          >
+            <ion-icon name="reorder-four-outline"></ion-icon>
+            Sights
+          </ion-item-option>
+        </ion-item-options>
       </ion-item-sliding>
       <app-city *ngIf="showEdit==i" [isNew]="false" [city]="city"></app-city>
     </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { City } from 'src/app/service/data-getter.service';
+import { City } from 'src/app/services/data-getter.service';
 
 @Component({
   selector: 'app-city',

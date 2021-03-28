@@ -1,3 +1,4 @@
+import { DataGetterService } from './../../services/data-getter.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { City } from 'src/app/services/data-getter.service';
 
@@ -13,29 +14,33 @@ export class CityComponent implements OnInit {
   @Output() cancelAddingCity = new EventEmitter();
   title: string;
 
-  constructor() { }
+  constructor(private dataGetter: DataGetterService) {}
 
   ngOnInit() {
-    if(this.isNew){
+    if (this.isNew) {
       this.city = {
+        id: null,
         cityName: '',
-        population: '',
-        country: ''
+        country: '',
+        population: ''
       };
-      this.title = 'New city'
+      this.title = 'New city';
     }
   }
 
-  addNew(){
-    if(this.isNew){
+  addNew() {
+    if (this.isNew) {
       this.addCity.emit(this.city);
     }
   }
 
-  cancelAdding(){
-    if(this.isNew){
+  cancelAdding() {
+    if (this.isNew) {
       this.cancelAddingCity.emit();
     }
   }
 
+  saveCity() {
+    this.dataGetter.editCity(this.city).subscribe((data) => console.log(data));
+  }
 }

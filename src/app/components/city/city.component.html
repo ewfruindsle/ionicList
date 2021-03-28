@@ -2,41 +2,45 @@
   <ion-card-header>
     <ion-card-title>{{ title }}</ion-card-title>
   </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="city.cityName"
+        name="cityName"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Country</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="city.country"
+        name="country"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Population</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="city.population"
+        name="population"
+      ></ion-input>
+    </ion-item>
+    <ion-button *ngIf="isNew" color="primary" (click)="addNew()">
+      <ion-icon slot="start" name="add-circle"></ion-icon> Add
+    </ion-button>
+    <ion-button
+      *ngIf="isNew"
+      color="danger"
+      class="ion-float-right"
+      (click)="cancelAdding()"
+    >
+      <ion-icon slot="start" name="close"></ion-icon> Cancel
+    </ion-button>
+    <ion-button  *ngIf="!isNew" color="primary" (click)="saveCity()">
+      <ion-icon  slot="start" name="save"></ion-icon> Save
+    </ion-button>
+  </ion-card-content>
 </ion-card>
-<ion-card-content>
-  <ion-item>
-    <ion-label position="floating">Name</ion-label>
-    <ion-input
-      type="string"
-      [(ngModel)]="city.cityName"
-      name="cityName"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Country</ion-label>
-    <ion-input
-      type="string"
-      [(ngModel)]="city.country"
-      name="country"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Population</ion-label>
-    <ion-input
-      type="string"
-      [(ngModel)]="city.population"
-      name="population"
-    ></ion-input>
-  </ion-item>
-  <ion-button *ngIf="isNew" color="primary" (click)="addNew()">
-    <ion-icon slot="start" name="add-circle"></ion-icon> Add
-  </ion-button>
-  <ion-button
-    *ngIf="isNew"
-    color="danger"
-    class="ion-float-right"
-    (click)="cancelAdding()"
-  >
-    <ion-icon slot="start" name="close"></ion-icon> Cancel
-  </ion-button>
-</ion-card-content>

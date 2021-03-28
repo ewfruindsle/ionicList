@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface City {
+  id: number;
   cityName: string;
   population: string;
   country: string;
@@ -11,58 +13,18 @@ export interface City {
   providedIn: 'root',
 })
 export class DataGetterService {
-  private cities: City[] = [
-    {
-      cityName: 'Nikolaev',
-      country: 'Ukraine',
-      population: '486267',
-    },
-    {
-      cityName: 'Stockholm',
-      country: 'Sweden',
-      population: '975551',
-    },
-    {
-      cityName: 'Melbourne',
-      country: 'Australia',
-      population: '486267',
-    },
-  ];
+  baseUrl = 'http://localhost/api/';
+  private cities: [];
+  private users = [];
+  private sights = [];
+
+  constructor(private http: HttpClient) {}
 
   private username = '';
-  private users = ['Anastasiia', 'Alice', 'Alexander'];
+  private token = '';
 
-  private sights = [
-    { name: 'Yacht club', city: 'Nikolaev', foundationYear: '1889' },
-    {
-      name: 'Nikolaev Astronomical Observatory',
-      city: 'Nikolaev',
-      foundationYear: '1821',
-    },
-    {
-      name: 'Stockholms stadsbibliotek',
-      city: 'Stockholm',
-      foundationYear: '1928',
-    },
-    { name: 'Vasamuseet', city: 'Stockholm', foundationYear: '1990' },
-    {
-      name: 'Royal Botanic Gardens',
-      city: 'Melbourne',
-      foundationYear: '1846',
-    },
-    {
-      name: 'Federation Square',
-      city: 'Melbourne',
-      foundationYear: '2002',
-    },
-  ];
-
-  getSights(cityName: string): Observable<any[]> {
-    return of(
-      this.sights.filter((item) => {
-        return item.city === cityName;
-      })
-    );
+  checkUser(user) {
+    return this.http.post<any>(this.baseUrl + '?action=login', user);
   }
 
   getUser() {
@@ -73,21 +35,40 @@ export class DataGetterService {
     this.username = name;
   }
 
-  userExists(name: string): boolean {
-    return this.users.indexOf(name) !== -1;
+  setToken(token: string) {
+    this.token = token;
   }
 
-  constructor() {}
-
-  getCities(): Observable<City[]> {
-    return of(this.cities);
+  getCities() {
+    return this.http.get<any>(
+      this.baseUrl + '?action=get-cities&token=' + this.token
+    );
   }
 
-  addCity(city: City) {
-    this.cities.push(city);
+  editCity(city) {
+    return this.http.post<any>(
+      this.baseUrl + '?action=edit-city&token=' + this.token,
+      city
+    );
   }
 
-  deleteCity(index) {
-    this.cities.splice(index, 1);
+  addCity(city) {
+    return this.http.post<any>(
+      this.baseUrl + '?action=add-city&token=' + this.token,
+      city
+    );
+  }
+
+  deleteCity(city) {
+    return this.http.post<any>(
+      this.baseUrl + '?action=delete-city&token=' + this.token,
+      city
+    );
+  }
+
+  getSights(id: number) {
+    return this.http.get<any>(
+      this.baseUrl + `?action=get-sights&city_id=${id}&token=${this.token}`
+    );
   }
 }

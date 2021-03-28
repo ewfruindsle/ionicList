@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./sights.page.scss'],
 })
 export class SightsPage implements OnInit {
+  city_id: number;
   cityNm: string;
   sights: any[];
   textData: string;
@@ -17,17 +18,18 @@ export class SightsPage implements OnInit {
     private dataGetter: DataGetterService,
     private route: ActivatedRoute,
     private sharedData: SharedDataService
-  ) {}
+  ) {
+    this.city_id = +this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
     this.cityNm = this.route.snapshot.paramMap.get('cityNm');
-    this.dataGetter.getSights(this.cityNm).subscribe((data) => {
+    this.dataGetter.getSights(this.city_id).subscribe((data) => {
       this.sights = data;
     });
   }
 
   passData() {
-    
     this.sharedData.setTextData(this.textData);
   }
 }

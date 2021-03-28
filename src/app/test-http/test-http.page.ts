@@ -42,5 +42,19 @@ export class TestHttpPage implements OnInit {
 
   ngOnInit() {
     this.refreshData(false);
+    this.http.get('http://localhost/api/?a=5&b=7').subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    this.http.post('http://localhost/api/', {
+      name: 'Anastasiia',
+      age:21
+    }).subscribe(
+      data=>{
+        console.log(data);
+        
+      }
+    )
   }
 }

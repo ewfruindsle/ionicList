@@ -34,7 +34,7 @@
             <ion-icon name="create"></ion-icon>
             Change
           </ion-item-option>
-          <ion-item-option color="danger" (click)="delete(i)">
+          <ion-item-option color="danger" (click)="delete(city)">
             <ion-icon name="trash"></ion-icon>
             Delete
           </ion-item-option>
@@ -47,7 +47,7 @@
         <ion-item-options side="end">
           <ion-item-option
             color="secondary"
-            routerLink="/sights/{{city.cityName}}"
+            [routerLink]="['/sights/'+city.cityName, {id: city.id}]"
             routerDirection="forward"
           >
             <ion-icon name="reorder-four-outline"></ion-icon>

@@ -24,24 +24,25 @@ export class HomePage {
     this.username = this.dataGetter.getUser();
   }
 
-  ionViewDidEnter() {
-    if (this.sharedData.getTextData().length != 0) {
-      this.title = this.sharedData.getTextData();
-    }
-  }
-
   add() {
     this.showNew = true;
   }
 
-  edit(city: City) {}
-
-  delete(index: number) {
-    this.dataGetter.deleteCity(index);
+  delete(city) {
+    this.dataGetter.deleteCity(city).subscribe((res) => {
+      this.dataGetter.getCities().subscribe((data) => {
+        this.cities = data;
+      });
+    });
   }
 
   addCity(city) {
-    this.dataGetter.addCity(city);
+    this.dataGetter.addCity(city).subscribe((res) => {
+      this.dataGetter.getCities().subscribe((data) => {
+       
+        this.cities = data;
+      });
+    });
     this.showNew = false;
   }
 }
